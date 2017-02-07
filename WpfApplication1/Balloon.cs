@@ -22,35 +22,18 @@ namespace WpfApplication1
 
         static Random rndGen = new Random();
 
-        public Balloon(Canvas canvas)
-        {
-            diameter = rndGen.Next(10, 30);
-            x = rndGen.Next(10, 300);
-            y = rndGen.Next(10, 200);
+        public Balloon(Canvas canvas) : this(canvas, rndGen.Next(10, 30)) { }
 
-            UpdateEllipse(canvas);
-        }
+        public Balloon(Canvas canvas, int diameter) : this(canvas, diameter, rndGen.Next(10, 300), rndGen.Next(10, 200)) {}
 
-        public Balloon(Canvas canvas, int diameter)
+        public Balloon(Canvas canvas, int diameter, int height) : this(canvas, diameter, height, rndGen.Next(10, 200)) {}
+
+        public Balloon(Canvas canvas, int diameter, int height, int width)
         {
             this.diameter = diameter;
-            x = rndGen.Next(10, 300);
-            y = rndGen.Next(10, 200);
-
-            UpdateEllipse(canvas);
-        }
-
-        public Balloon(Canvas canvas, int diameter, int height)
-        {
-            this.diameter = diameter;
-            x = rndGen.Next(10, 300);
+            x = width;
             y = height;
 
-            UpdateEllipse(canvas);
-        }
-
-        void UpdateEllipse(Canvas canvas)
-        {
             ellipse.Width = diameter;
             ellipse.Height = diameter;
             ellipse.Margin = new Thickness(x, y, 0, 0);
@@ -70,6 +53,5 @@ namespace WpfApplication1
             y -= 10;
             ellipse.Margin = new Thickness(x, y, 0, 0);
         }
-
     }
 }
