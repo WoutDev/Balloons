@@ -15,11 +15,11 @@ namespace WpfApplication1
     class Balloon
     {
         private int x = 10;
-        private int y = 100;
+        private int y = 10;
         private int diameter = 10;
 
         Ellipse ellipse = new Ellipse();
-
+       
         static Random rndGen = new Random();
 
         public Balloon(Canvas canvas) : this(canvas, rndGen.Next(10, 30)) { }
@@ -28,10 +28,10 @@ namespace WpfApplication1
 
         public Balloon(Canvas canvas, int diameter, int height) : this(canvas, diameter, height, rndGen.Next(10, 200)) {}
 
-        public Balloon(Canvas canvas, int diameter, int height, int width)
+        public Balloon(Canvas canvas, int diameter, int height, int xpos)
         {
             this.diameter = diameter;
-            x = width;
+            x = xpos;
             y = height;
 
             ellipse.Width = diameter;

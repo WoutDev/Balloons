@@ -20,17 +20,32 @@ namespace WpfApplication1
     /// </summary>
     public partial class MainWindow : Window
     {
+        static Random rndGen = new Random();
         List<Balloon> balloons = new List<Balloon>();
 
         public MainWindow()
         {
             InitializeComponent();
+            InitializeBalloons();
+        }
 
+        private void InitializeBalloons()
+        {
+            balloons.Clear();
             for(var i = 0; i<100; i++)
             {
-                Balloon newBalloon = new Balloon(canvas, 20, 100);
+                Balloon newBalloon = new Balloon(canvas, 
+                        rndGen.Next(10, 50), 
+                        rndGen.Next(300),
+                        rndGen.Next(300)
+                    );
                 balloons.Add(newBalloon);
             }
+        }
+
+        private void initButton_Click(object sender, RoutedEventArgs e)
+        {
+            InitializeBalloons();
         }
 
         private void growButton_Click(object sender, RoutedEventArgs e)
