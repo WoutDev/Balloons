@@ -21,6 +21,7 @@ namespace WpfApplication1
 
         Ellipse ellipse = new Ellipse();
         TextBlock block;
+        Brush bgBrush = new LinearGradientBrush(Colors.Red, Colors.Pink, 90);
 
         public Balloon(Canvas canvas) : this(canvas, 10) { }
 
@@ -38,7 +39,6 @@ namespace WpfApplication1
             ellipse.Height = diameter;
             ellipse.Margin = new Thickness(x, y, 0, 0);
             ellipse.Stroke = new SolidColorBrush(Colors.Red);
-            ellipse.Fill = new SolidColorBrush(Colors.Aqua);
 
             text = "Happy Birthday";
 
@@ -47,9 +47,10 @@ namespace WpfApplication1
             block.TextAlignment = TextAlignment.Center;
             block.VerticalAlignment = VerticalAlignment.Center;
             updateBlock();
-
+            ellipse.Fill = bgBrush;
             canvas.Children.Add(ellipse);
             canvas.Children.Add(block);
+
         }
 
         private void updateBlock()
