@@ -17,9 +17,10 @@ namespace WpfApplication1
         private int x = 10;
         private int y = 10;
         private int diameter = 10;
+        private String text;
 
         Ellipse ellipse = new Ellipse();
-        Label label;
+        TextBlock block;
 
         public Balloon(Canvas canvas) : this(canvas, 10) { }
 
@@ -39,24 +40,28 @@ namespace WpfApplication1
             ellipse.Stroke = new SolidColorBrush(Colors.Red);
             ellipse.Fill = new SolidColorBrush(Colors.Aqua);
 
-            label = new Label();
-            label.FontSize = 5.00;
-            UpdateLabel();
+            text = "Happy Birthday";
+
+            block = new TextBlock();
+            block.HorizontalAlignment = HorizontalAlignment.Center;
+            block.TextAlignment = TextAlignment.Center;
+            block.VerticalAlignment = VerticalAlignment.Center;
+            updateBlock();
 
             canvas.Children.Add(ellipse);
-            canvas.Children.Add(label);
+            canvas.Children.Add(block);
         }
 
-        private void UpdateLabel()
+        private void updateBlock()
         {
-            label.Content = "Balloon at x" + x + " y" + y;
-            label.Margin = ellipse.Margin;
+            block.Text = Text;
+            block.Margin = ellipse.Margin;
         }
 
         public void Grow()
         {
             diameter += 10;
-            label.FontSize += 2.50;
+            block.FontSize += 2.50;
             ellipse.Width = diameter;
             ellipse.Height = diameter;
         }
@@ -66,7 +71,20 @@ namespace WpfApplication1
             y -= 10;
             ellipse.Margin = new Thickness(x, y, 0, 0);
 
-            UpdateLabel();
+            updateBlock();
+        }
+
+        public String Text
+        {
+            get
+            {
+                return text;
+            }
+            set
+            {
+                this.text = value;
+                updateBlock();
+            }
         }
     }
 }
