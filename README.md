@@ -11,7 +11,7 @@ TODO:
 
 - [x] verplaats random generator van Balloon naar MainWindow
 - [x] zorg dat oude ballonnen verdwijnen bij init
-- [ ] achtergrondkleur
+- [x] achtergrondkleur
 - [ ] tekst
 - [ ] maak properties:
 	- X
