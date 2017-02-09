@@ -19,14 +19,12 @@ namespace WpfApplication1
         private int diameter = 10;
 
         Ellipse ellipse = new Ellipse();
-       
-        static Random rndGen = new Random();
 
-        public Balloon(Canvas canvas) : this(canvas, rndGen.Next(10, 30)) { }
+        public Balloon(Canvas canvas) : this(canvas, 10) { }
 
-        public Balloon(Canvas canvas, int diameter) : this(canvas, diameter, rndGen.Next(10, 300), rndGen.Next(10, 200)) {}
+        public Balloon(Canvas canvas, int diameter) : this(canvas, diameter, 50) {}
 
-        public Balloon(Canvas canvas, int diameter, int height) : this(canvas, diameter, height, rndGen.Next(10, 200)) {}
+        public Balloon(Canvas canvas, int diameter, int height) : this(canvas, diameter, height, 50) {}
 
         public Balloon(Canvas canvas, int diameter, int height, int xpos)
         {
