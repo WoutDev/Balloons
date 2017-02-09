@@ -10,31 +10,55 @@ using System.Windows.Controls;
 
 namespace WpfApplication1
 {
-    // ENCAPSULATIE
-
     class Balloon
     {
+        // First we define the PRIVATE parts of the Balloon.
+
         private int x = 10;
         private int y = 10;
         private int diameter = 10;
         private String text;
 
+        const int growAmount = 10;
+        const int moveAmount = 10;
+
         Ellipse ellipse = new Ellipse();
         TextBlock block;
         Brush bgBrush = new LinearGradientBrush(Colors.Red, Colors.Pink, 90);
+        Brush strokeBrush = Brushes.Red;
 
-        public Balloon(Canvas canvas) : this(canvas, 10) { }
+        /*
+         * This method uses the class variables x, y and diameter
+         * to update the WPF-controls included in this class.
+         */
+        private void UpdateBalloon(Canvas canvas)
+        {
+            ellipse.Width = diameter;
+            ellipse.Height = diameter;
+            ellipse.Margin = new Thickness(x, y, 0, 0);
+            ellipse.Stroke = strokeBrush;
+            ellipse.Fill = bgBrush;
+        }
 
-        public Balloon(Canvas canvas, int diameter) : this(canvas, diameter, 50) {}
 
-        public Balloon(Canvas canvas, int diameter, int height) : this(canvas, diameter, height, 50) {}
+        // BELOW this point, you will find the PUBLIC interface to the Balloon
 
+        /*
+         * This constructor uses another constructor to specify default values for
+         * height and xpos.
+         */ 
+        public Balloon(Canvas canvas, int diameter) : this(canvas, diameter, 10, 10)
+        { }
+
+        /*
+         * This constructor allows choosing the diameter, height and xpos of the balloon
+         */ 
         public Balloon(Canvas canvas, int diameter, int height, int xpos)
         {
             this.diameter = diameter;
             x = xpos;
             y = height;
-
+            
             ellipse.Width = diameter;
             ellipse.Height = diameter;
             ellipse.Margin = new Thickness(x, y, 0, 0);
@@ -48,6 +72,7 @@ namespace WpfApplication1
             block.VerticalAlignment = VerticalAlignment.Center;
             updateBlock();
             ellipse.Fill = bgBrush;
+            UpdateBalloon(canvas);
             canvas.Children.Add(ellipse);
             canvas.Children.Add(block);
 
@@ -63,13 +88,14 @@ namespace WpfApplication1
         {
             diameter += 10;
             block.FontSize += 2.50;
+            diameter += growAmount;
             ellipse.Width = diameter;
             ellipse.Height = diameter;
         }
 
         public void Move()
         {
-            y -= 10;
+            y -= moveAmount;
             ellipse.Margin = new Thickness(x, y, 0, 0);
 
             updateBlock();
