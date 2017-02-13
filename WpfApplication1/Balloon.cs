@@ -31,7 +31,7 @@ namespace WpfApplication1
          * This method uses the class variables x, y and diameter
          * to update the WPF-controls included in this class.
          */
-        private void UpdateBalloon(Canvas canvas)
+        private void UpdateBalloon()
         {
             ellipse.Width = diameter;
             ellipse.Height = diameter;
@@ -65,14 +65,14 @@ namespace WpfApplication1
             ellipse.Stroke = new SolidColorBrush(Colors.Red);
 
             text = "Happy Birthday";
-
+            
             block = new TextBlock();
             block.HorizontalAlignment = HorizontalAlignment.Center;
             block.TextAlignment = TextAlignment.Center;
             block.VerticalAlignment = VerticalAlignment.Center;
             updateBlock();
             ellipse.Fill = bgBrush;
-            UpdateBalloon(canvas);
+            UpdateBalloon();
             canvas.Children.Add(ellipse);
             canvas.Children.Add(block);
 
@@ -100,7 +100,7 @@ namespace WpfApplication1
 
             updateBlock();
         }
-
+        
         public String Text
         {
             get
@@ -111,6 +111,19 @@ namespace WpfApplication1
             {
                 this.text = value;
                 updateBlock();
+            }
+        }
+
+        public Brush Background
+        {
+            get
+            {
+                return bgBrush;
+            }
+            set
+            {
+                bgBrush = value;
+                UpdateBalloon();
             }
         }
     }
